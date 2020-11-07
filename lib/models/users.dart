@@ -1,23 +1,26 @@
+import 'package:flutter/widgets.dart';
+
 class User {
-  String id;
-  String name;
-  String cpf;
-  String email;
-  String phone;
-  String birthdate;
-  bool member;
-  bool admin;
-  String createdAt;
-  String updatedAt;
-  String token;
+  final String id;
+  final String name;
+  final String cpf;
+  final String birthdate;
+  final bool admin;
+  final String email;
+  final String phone;
+  final bool member;
+  final String createdAt;
+  final String updatedAt;
+  final String token;
 
   User({
     this.id,
-    this.name,
-    this.cpf,
+    @required this.name,
+    @required this.cpf,
+    @required this.birthdate,
+    this.admin,
     this.email,
     this.phone,
-    this.birthdate,
     this.member,
     this.createdAt,
     this.updatedAt,
@@ -28,9 +31,11 @@ class User {
     return User(
       id: json['id'],
       name: json['name'],
-      phone: json['phone'],
-      email: json['email'],
+      cpf: json['cpf'],
       birthdate: json['birthdate'],
+      admin: json['admin'],
+      email: json['email'],
+      phone: json['phone'],
       member: json['member'],
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
