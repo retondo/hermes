@@ -7,7 +7,7 @@ class Api {
   final Map<String, String> _headers = {
     HttpHeaders.contentTypeHeader: 'application/json'
   };
-  String path;
+  final String path;
 
   Api([this.path = '']) {
     if (this.path.isNotEmpty && this.path.indexOf('/') != 0) {
@@ -18,17 +18,26 @@ class Api {
   String get url => this._apiBaseUrl + this.path;
 
   Future<http.Response> getOne({ String path = '', String id = '' }) {
+    this._throwErrorIfInvalidPath(path);
     final _url = path.isNotEmpty ? _apiBaseUrl + path : url;
     return http.get(_url + id);
   }
 
   Future<http.Response> post({ String path = '', String data }) {
+    this._throwErrorIfInvalidPath(path);
     final _url = path.isNotEmpty ? _apiBaseUrl + path : url;
     return http.post(_url, headers: _headers, body: data);
   }
 
   Future<http.Response> put({ String path = '', String id, String data }) {
+    this._throwErrorIfInvalidPath(path);
     final _url = path.isNotEmpty ? _apiBaseUrl + path : url;
     return http.put(_url + id, body: data);
+  }
+
+  _throwErrorIfInvalidPath(path) {
+    if (path.isNotEmpty && path.indexOf('/') != 0) {
+      throw('Path should start with slash "/"');
+    }
   }
 }
