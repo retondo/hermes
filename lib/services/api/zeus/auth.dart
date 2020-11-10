@@ -8,7 +8,7 @@ class AuthApi {
   final _dio = AppDio().instance;
   final String _apiBaseUrl = AppConfig.get('API_BASE_URL');
 
-  Future<dynamic> signIn(String username, String password) async {
+  Future<dynamic> login(String username, String password) async {
     final data = json.encode({
       'username': username,
       'password': password
@@ -27,7 +27,7 @@ class AuthApi {
     }
   }
 
-  Future<dynamic> signUp(User user) async {
+  Future<dynamic> register(User user) async {
     final encodedUser = json.encode(user);
 
     try {

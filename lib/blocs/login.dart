@@ -11,7 +11,7 @@ class LoginBloc extends ChangeNotifier {
     try {
       isLoading = true;
       notifyListeners();
-      return await authApi.signIn(username, password);
+      return await authApi.login(username, password);
     } catch (err) {
       return null;
     } finally {
