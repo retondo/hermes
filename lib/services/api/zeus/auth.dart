@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'package:hermes/app_config.dart';
 import 'package:hermes/models/users.dart';
 import 'package:hermes/services/app_dio.dart';
 import 'package:hermes/services/storage.dart';
 
 class AuthApi {
   final _dio = AppDio().instance;
-  final String _apiBaseUrl = AppConfig.get('API_BASE_URL');
 
   Future<dynamic> login(String username, String password) async {
     final data = json.encode({
@@ -15,7 +13,7 @@ class AuthApi {
     });
 
     try {
-      final response = await _dio.post('$_apiBaseUrl/authenticate', data: data);
+      final response = await _dio.post('/authenticate', data: data);
       if (response.statusCode == 200) {
         final user = User.fromJson(response.data);
         await Storage.set('authenticatedUser', user.toString());
@@ -31,7 +29,7 @@ class AuthApi {
     final encodedUser = json.encode(user);
 
     try {
-      final response = await _dio.post('$_apiBaseUrl/register', data: encodedUser);
+      final response = await _dio.post('/register', data: encodedUser);
       if (response.statusCode == 201) {
         final authenticatedUser = User.fromJson(response.data);
         await Storage.set('authenticatedUser', authenticatedUser.toString());

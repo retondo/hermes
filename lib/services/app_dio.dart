@@ -1,21 +1,24 @@
 import 'package:dio/dio.dart';
+import 'package:hermes/app_config.dart';
 import 'package:hermes/services/storage.dart';
 
 class AppDio {
-  Dio _dio;
+  final Dio _dio = Dio();
+  final String _baseUrl = AppConfig.get('API_BASE_URL');
 
-  AppDio() {
-    _dio = Dio();
-    _dio.options = BaseOptions(
+  BaseOptions _setOptions() {
+    return BaseOptions(
       validateStatus: (status) => status < 500,
+      baseUrl: this._baseUrl,
     );
   }
 
+  AppDio() {
+    _dio.options = _setOptions();
+  }
+
   AppDio.withAuthentication() {
-    _dio = Dio();
-    _dio.options = BaseOptions(
-      validateStatus: (status) => status < 500,
-    );
+    _dio.options = _setOptions();
     _dio.interceptors.add(InterceptorsWrapper(
       onError: _onError,
       onRequest: _onRequest,
@@ -24,6 +27,7 @@ class AppDio {
   }
 
   Dio get instance => _dio;
+  String get baseUrl => _baseUrl;
 
   _onError(DioError e) {
     print('ERROR: $e');
