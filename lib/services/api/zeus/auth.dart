@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:hermes/models/users.dart';
+import 'package:dio/dio.dart';
+import 'package:hermes/models/user.dart';
 import 'package:hermes/services/app_dio.dart';
 import 'package:hermes/services/storage.dart';
 
@@ -13,27 +14,25 @@ class AuthApi {
     });
 
     try {
-      final response = await _dio.post('/authenticate', data: data);
+      Response<Map<String, dynamic>> response = await _dio.post('/authenticate', data: data);
       if (response.statusCode == 200) {
-        final user = User.fromJson(response.data);
-        await Storage.set('authenticatedUser', user.toString());
-        return user;
+        await Storage.write('authenticatedUser', response.data.toString());
+        return User.fromJson(response.data);
       }
       return null;
     } catch (err) {
+      print('Erro do AuthApi.login: $err');
       return null;
     }
   }
 
   Future<dynamic> register(User user) async {
-    final encodedUser = json.encode(user);
-
     try {
-      final response = await _dio.post('/register', data: encodedUser);
+      Map<String, dynamic> encodedUser = user.toJson();
+      Response response = await _dio.post('/register', data: encodedUser);
       if (response.statusCode == 201) {
-        final authenticatedUser = User.fromJson(response.data);
-        await Storage.set('authenticatedUser', authenticatedUser.toString());
-        return authenticatedUser;
+        await Storage.write('authenticatedUser', response.data.toString());
+        return User.fromJson(response.data);
       }
       return null;
     } catch (err) {

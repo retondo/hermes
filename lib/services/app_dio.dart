@@ -8,8 +8,8 @@ class AppDio {
 
   BaseOptions _setOptions() {
     return BaseOptions(
-      validateStatus: (status) => status < 500,
       baseUrl: this._baseUrl,
+      validateStatus: (status) => status < 500,
     );
   }
 
@@ -35,7 +35,7 @@ class AppDio {
   }
 
   _onRequest(RequestOptions options) async {
-    String authenticatedUser = await Storage.get('authenticatedUser');
+    String authenticatedUser = await Storage.read('authenticatedUser');
     print('authenticatedUser: $authenticatedUser');
   }
 
