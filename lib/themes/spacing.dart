@@ -1,5 +1,3 @@
-import 'package:flutter/widgets.dart';
-
 class SpacingTheme {
-  static const pagePadding = EdgeInsets.all(20.0);
+  static const pagePadding = 20.0;
 }

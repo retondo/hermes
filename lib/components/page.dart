@@ -13,9 +13,9 @@ class AppPage extends StatelessWidget {
     if (Platform.isAndroid) {
       return Scaffold(
         backgroundColor: Colors.white,
-        body: GestureDetector(
+        body: Container(
           child: child,
-          onTap: () => FocusScope.of(context).unfocus(),
+          height: double.infinity,
         ),
       );
     }

@@ -6,6 +6,8 @@ class Margin extends StatelessWidget {
   final double bottom;
   final double left;
   final double all;
+  final double horizontal;
+  final double vertical;
   final Widget child;
 
   Margin({
@@ -14,6 +16,8 @@ class Margin extends StatelessWidget {
     this.bottom,
     this.left,
     this.all,
+    this.horizontal,
+    this.vertical,
     @required this.child
   }) : super();
 
@@ -21,10 +25,10 @@ class Margin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(
-        all ?? left,
-        all ?? top,
-        all ?? right,
-        all ?? bottom
+        all ?? horizontal ?? left ?? 0,
+        all ?? vertical ?? top ?? 0,
+        all ?? horizontal ?? right ?? 0,
+        all ?? vertical ?? bottom ?? 0
       ),
       child: child,
     );

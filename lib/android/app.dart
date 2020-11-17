@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hermes/android/pages/home.dart';
-import 'package:hermes/android/pages/login/login.dart';
+import 'package:hermes/android/pages/login.dart';
+import 'package:hermes/blocs/home.dart';
 import 'package:hermes/blocs/login.dart';
 import 'package:hermes/components/page.dart';
 import 'package:hermes/services/storage.dart';
@@ -17,6 +18,7 @@ class AndroidApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
     ));
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -25,6 +27,7 @@ class AndroidApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LoginBloc>.value(value: LoginBloc()),
+        ChangeNotifierProvider<HomeBloc>.value(value: HomeBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
