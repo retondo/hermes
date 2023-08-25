@@ -17,7 +17,7 @@ class AuthApi {
       Response<Map<String, dynamic>> response = await _dio.post('/authenticate', data: data);
       if (response.statusCode == 200) {
         await Storage.write('authenticatedUser', response.data.toString());
-        return User.fromJson(response.data);
+        return User.fromJson(response.data!);
       }
       return null;
     } catch (err) {

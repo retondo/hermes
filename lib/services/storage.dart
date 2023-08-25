@@ -3,7 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class Storage {
   static final _storage = FlutterSecureStorage();
 
-  static Future<String> read(key) {
+  static Future<String?> read(key) {
     return _storage.read(key: key);
   }
 

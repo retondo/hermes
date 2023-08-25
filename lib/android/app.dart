@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hermes/android/pages/home.dart';
 import 'package:hermes/android/pages/login.dart';
-import 'package:hermes/blocs/home.dart';
+// import 'package:hermes/blocs/home.dart';
 import 'package:hermes/blocs/login.dart';
 import 'package:hermes/components/page.dart';
 import 'package:hermes/services/storage.dart';
@@ -27,13 +27,12 @@ class AndroidApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<LoginBloc>.value(value: LoginBloc()),
-        ChangeNotifierProvider<HomeBloc>.value(value: HomeBloc()),
+        // ChangeNotifierProvider<HomeBloc>.value(value: HomeBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primaryColor: ColorsTheme.primary,
-          accentColor: ColorsTheme.accent,
+          primaryColor: ColorsTheme.primary, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: ColorsTheme.accent),
         ),
         home: FutureBuilder(
           future: isLoggedIn(),

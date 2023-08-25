@@ -9,7 +9,7 @@ class AppDio {
   BaseOptions _setOptions() {
     return BaseOptions(
       baseUrl: this._baseUrl,
-      validateStatus: (status) => status < 500,
+      validateStatus: (status) => status !< 500,
     );
   }
 
@@ -29,18 +29,16 @@ class AppDio {
   Dio get instance => _dio;
   String get baseUrl => _baseUrl;
 
-  _onError(DioError e) {
+  void _onError(DioException e, ErrorInterceptorHandler h) {
     print('ERROR: $e');
-    return e;
   }
 
-  _onRequest(RequestOptions options) async {
-    String authenticatedUser = await Storage.read('authenticatedUser');
+  void _onRequest(RequestOptions options, RequestInterceptorHandler h) async {
+    String? authenticatedUser = await Storage.read('authenticatedUser');
     print('authenticatedUser: $authenticatedUser');
   }
 
-  _onResponse(Response e) {
-    print('RESPONSE: $e');
-    return e;
+  void _onResponse(Response res, ResponseInterceptorHandler h) {
+    print('RESPONSE: $res');
   }
 }

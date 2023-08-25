@@ -1,23 +1,21 @@
-import 'package:flutter/widgets.dart';
-
 class User {
-  final String id;
+  final String? id;
   final String name;
   final String cpf;
   final String birthdate;
-  final bool admin;
-  final String email;
-  final String phone;
-  final bool member;
-  final String createdAt;
-  final String updatedAt;
-  final String token;
+  final bool? admin;
+  final String? email;
+  final String? phone;
+  final bool? member;
+  final String? createdAt;
+  final String? updatedAt;
+  final String? token;
 
   User({
     this.id,
-    @required this.name,
-    @required this.cpf,
-    @required this.birthdate,
+    required this.name,
+    required this.cpf,
+    required this.birthdate,
     this.admin,
     this.email,
     this.phone,

@@ -5,7 +5,7 @@ class AppConfig {
     if (environment != 'dev' && environment != 'prod') {
       throw('Environment name should be "dev" or "prod"');
     }
-    await DotEnv().load('assets/env/.env_' + environment);
+    await DotEnv().load();
   }
 
   static get(varName) {

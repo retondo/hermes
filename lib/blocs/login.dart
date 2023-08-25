@@ -4,7 +4,9 @@ import 'package:hermes/services/api/zeus/auth.dart';
 
 class LoginBloc extends ChangeNotifier {
   final authApi = AuthApi();
-  String username, password;
+  late String username;
+  late String password;
+
   bool isLoading = false;
 
   Future<dynamic> login() async {
@@ -20,8 +22,8 @@ class LoginBloc extends ChangeNotifier {
     }
   }
 
-  String cpfValidator(String value) {
-    if (value.isEmpty) {
+  String? cpfValidator(String? value) {
+    if (value == null) {
       return 'Por favor, insira seu CPF';
     } else if (!CPF.isValid(value)) {
       return 'CPF é inválido';
@@ -29,8 +31,8 @@ class LoginBloc extends ChangeNotifier {
     return null;
   }
 
-  String pwdValidator(String value) {
-    if (value.isEmpty) {
+  String? pwdValidator(String? value) {
+    if (value == null) {
       return 'Por favor, insira sua senha';
     }
     // TODO: validate pwd strenght

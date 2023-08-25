@@ -1,13 +1,13 @@
 import 'package:flutter/widgets.dart';
 
 class Margin extends StatelessWidget {
-  final double top;
-  final double right;
-  final double bottom;
-  final double left;
-  final double all;
-  final double horizontal;
-  final double vertical;
+  final double? top;
+  final double? right;
+  final double? bottom;
+  final double? left;
+  final double? all;
+  final double? horizontal;
+  final double? vertical;
   final Widget child;
 
   Margin({
@@ -18,7 +18,7 @@ class Margin extends StatelessWidget {
     this.all,
     this.horizontal,
     this.vertical,
-    @required this.child
+    required this.child
   }) : super();
 
   @override
